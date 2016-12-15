@@ -1,3 +1,4 @@
 Django==1.10.4
 line-bot-sdk==1.0.2
 gunicorn==19.0.0
+apiai==1.2.1

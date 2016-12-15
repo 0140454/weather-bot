@@ -8,6 +8,7 @@ A LINE chat bot for querying current weather.
     * Django (`Django`)
     * gunicorn (`gunicorn`)
     * SDK for LINE Messaging API (`line-bot-api`)
+    * SDK for Google api.ai (`apiai`)
 
 ## How to build this bot
 
@@ -21,6 +22,7 @@ A LINE chat bot for querying current weather.
     export CWB_AUTHED_KEY='CWB_AUTHED_KEY'
     export LINE_CHANNEL_SECRET='LINE_CHANNEL_SECRET'
     export LINE_CHANNEL_ACCESS_TOKEN='LINE_CHANNEL_ACCESS_TOKEN'
+    export API_AI_CLIENT_ACCESS_TOKEN='API_AI_CLIENT_ACCESS_TOKEN'
     ```
 
     * Write secret to `weather_bot/secret.py`
@@ -29,6 +31,7 @@ A LINE chat bot for querying current weather.
     CWB_AUTHED_KEY = 'CWB_AUTHED_KEY'
     LINE_CHANNEL_SECRET = 'LINE_CHANNEL_SECRET'
     LINE_CHANNEL_ACCESS_TOKEN = 'LINE_CHANNEL_ACCESS_TOKEN'
+    API_AI_CLIENT_ACCESS_TOKEN = 'API_AI_CLIENT_ACCESS_TOKEN'
     ```
 
 2. Modify `ALLOWED_HOSTS` in `weather_bot/settings.py`
@@ -51,3 +54,4 @@ A LINE chat bot for querying current weather.
 ## Reference
 
 * [HaoTse's Blog](http://haotse-blog.logdown.com/)
+* [My API.AI Note](http://0140454-blog.logdown.com/posts/1210710-chat-bot-google-apiai-application)

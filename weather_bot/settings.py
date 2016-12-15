@@ -27,7 +27,8 @@ except ImportError:
     SECRET_KEY = get_env_variable('SECRET_KEY')
     CWB_AUTHED_KEY = get_env_variable('CWB_AUTHED_KEY')
     LINE_CHANNEL_SECRET = get_env_variable('LINE_CHANNEL_SECRET')
-    LINE_CHANNEL_ACCESS_TOKEN= get_env_variable('LINE_CHANNEL_ACCESS_TOKEN')
+    LINE_CHANNEL_ACCESS_TOKEN = get_env_variable('LINE_CHANNEL_ACCESS_TOKEN')
+    API_AI_CLIENT_ACCESS_TOKEN = get_env_variable('API_AI_CLIENT_ACCESS_TOKEN')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

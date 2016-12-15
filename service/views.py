@@ -9,12 +9,15 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from .weather import get_current_weather
+from .api_ai import intent_parser
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 @csrf_exempt
 def callback(request):
+    DEFAULT_LOCATION = '臺南市'
+
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
@@ -30,7 +33,16 @@ def callback(request):
             if isinstance(event, MessageEvent):
                 if isinstance(event.message, TextMessage):
                     if '天氣' in event.message.text:
-                        response = get_current_weather('臺南')
+                        intent = intent_parser(event.message.text)
+                        if intent['result']['action'] == 'input.unknown':
+                            response = '目前無法理解您要查詢哪一個城市。\n' \
+                                       '以下將替您查詢%s的天氣。\n\n' \
+                                       '%s' % (DEFAULT_LOCATION, get_current_weather(DEFAULT_LOCATION))
+                        else:
+                            place = intent['result']['parameters']['taiwan-city']
+                            if len(place) == 0:
+                                place = DEFAULT_LOCATION
+                            response = get_current_weather(place)
                     else:
                         response = event.message.text
 
