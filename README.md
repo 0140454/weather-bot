@@ -47,3 +47,7 @@ A LINE chat bot for querying current weather.
     Fill callback url for bot in `Webhook URL` field.
 
     (e.g. `https://YOUR_HOST/service/callback/`)
+
+## Reference
+
+* [HaoTse's Blog](http://haotse-blog.logdown.com/)
