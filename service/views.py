@@ -8,6 +8,8 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
+from .weather import get_current_weather
+
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
@@ -27,9 +29,14 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):
                 if isinstance(event.message, TextMessage):
+                    if '天氣' in event.message.text:
+                        response = get_current_weather('臺南')
+                    else:
+                        response = event.message.text
+
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text = event.message.text)
+                        TextSendMessage(text = response)
                     )
 
         return HttpResponse()
