@@ -18,7 +18,11 @@ def get_current_weather(city):
     for location in tree.findall('.//{urn:cwb:gov:tw:cwbcommon:0.1}location'):
         if city in location[0].text:
             # If the city is found, access its child direct.
-            return '%s目前的天氣為%s。' % (location[0].text, location[1][1][2][0].text)
+            return '%s目前的天氣為%s。\n' \
+                   '溫度為 %s 至 %s ℃，降雨機率為 %s %%。' \
+                   % (location[0].text, location[1][1][2][0].text,
+                      location[3][1][2][0].text, location[2][1][2][0].text,
+                      location[5][1][2][0].text)
 
     return '很抱歉，無法提供您該城市的天氣。'
 
