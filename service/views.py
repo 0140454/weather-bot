@@ -32,19 +32,19 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):
                 if isinstance(event.message, TextMessage):
-                    if '天氣' in event.message.text:
-                        intent = intent_parser(event.message.text)
-                        if intent['result']['action'] == 'input.unknown':
+                    intent = intent_parser(event.message.text)
+                    if intent['result']['action'] == 'input.unknown':
+                        if '天氣' in event.message.text:
                             response = '目前無法理解您要查詢哪一個城市。\n' \
                                        '以下將替您查詢%s的天氣。\n\n' \
                                        '%s' % (DEFAULT_LOCATION, get_current_weather(DEFAULT_LOCATION))
                         else:
-                            place = intent['result']['parameters']['taiwan-city']
-                            if len(place) == 0:
-                                place = DEFAULT_LOCATION
-                            response = get_current_weather(place)
+                            response = event.message.text
                     else:
-                        response = event.message.text
+                        place = intent['result']['parameters']['taiwan-city']
+                        if len(place) == 0:
+                            place = DEFAULT_LOCATION
+                        response = get_current_weather(place)
 
                     line_bot_api.reply_message(
                         event.reply_token,
